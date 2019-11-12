@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.pc.dubboapi.model.UserAddress;
 import com.pc.dubboapi.service.OrderService;
 import com.pc.dubboapi.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
