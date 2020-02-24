@@ -25,7 +25,7 @@
     <dubbo:reference interface="com.pc.dubboapi.service.UserService" id="userService"/>
 
 
-    <!--连接监控中心，按协议连接和按照地址连接-->
+    <!--连接监控中心，按协议连接和按照地址连接 -->
     <dubbo:monitor protocol="register"/>
     <!--<dubbo:monitor address="127.0.0.1:7070"/>-->
 
