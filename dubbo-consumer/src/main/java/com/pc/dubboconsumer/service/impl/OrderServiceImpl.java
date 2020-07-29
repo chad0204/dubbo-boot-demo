@@ -5,6 +5,7 @@ import com.pc.dubboapi.model.UserAddress;
 import com.pc.dubboapi.service.OrderService;
 import com.pc.dubboapi.service.UserService;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -18,8 +19,9 @@ public class OrderServiceImpl implements OrderService {
 
         UserAddress userAddress = userService.getUserAddress(uid);
 
-        System.out.println(userAddress.getUsername()+":"+userAddress.getAddress());
-
+        Optional.ofNullable(userAddress).ifPresent(x -> {
+            System.out.println(x.getUsername()+":"+x.getAddress());
+        });
         return userAddress;
 
     }
