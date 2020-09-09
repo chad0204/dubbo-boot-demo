@@ -1,9 +1,11 @@
 package com.pc.dubboconsumer.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import com.pc.dubboapi.command.model.request.ARequest;
+import com.pc.dubboapi.command.service.IService;
 import com.pc.dubboapi.model.UserAddress;
 import com.pc.dubboapi.service.OrderService;
 import com.pc.dubboapi.service.UserService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -11,11 +13,14 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
 
 
-    //@Autowired
+//    @Autowired
     @Reference(loadbalance="random")
     UserService userService;
 
+
     public UserAddress initOrder(Long uid) {
+
+
 
         UserAddress userAddress = userService.getUserAddress(uid);
 

@@ -21,8 +21,9 @@
     <dubbo:registry protocol="zookeeper" address="47.98.213.18:2181"/>
 
 
-    <!--引用服务接口，生成远程服务代理-->
-    <dubbo:reference interface="com.pc.dubboapi.service.UserService" id="userService"/>
+    <!--引用服务接口，生成远程服务代理,采用注解引用，注释配置引用-->
+    <!--<dubbo:reference interface="com.pc.dubboapi.service.UserService" id="userService"/>-->
+    <!--<dubbo:reference interface="com.pc.dubboapi.command.service.IService" id="iService"/>-->
 
 
     <!--连接监控中心，按协议连接和按照地址连接 -->
