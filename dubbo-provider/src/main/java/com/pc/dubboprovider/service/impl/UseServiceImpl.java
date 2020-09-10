@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Component
 @Service//这个注解不是Spring的，是dubbo用于暴露服务的
 public class UseServiceImpl implements UserService,InnerUserService {
