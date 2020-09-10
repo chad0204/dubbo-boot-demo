@@ -1,8 +1,7 @@
 package com.pc.dubboconsumer.service.impl;
 
-import com.pc.dubboapi.command.model.request.ARequest;
-import com.pc.dubboapi.command.service.IService;
 import com.pc.dubboapi.model.UserAddress;
+import com.pc.dubboapi.model.UserParam;
 import com.pc.dubboapi.service.OrderService;
 import com.pc.dubboapi.service.UserService;
 import org.apache.dubbo.config.annotation.Reference;
@@ -21,8 +20,9 @@ public class OrderServiceImpl implements OrderService {
     public UserAddress initOrder(Long uid) {
 
 
-
-        UserAddress userAddress = userService.getUserAddress(uid);
+        UserParam param = new UserParam();
+        param.setId(uid);
+        UserAddress userAddress = userService.getUserAddress(param);
 
         Optional.ofNullable(userAddress).ifPresent(x -> {
             System.out.println(x.getUsername()+":"+x.getAddress());
