@@ -3,41 +3,35 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>com.pc</groupId>
+        <groupId>com.dfire.dubbo</groupId>
         <artifactId>dubbo-boot-demo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>dubbo-provider</artifactId>
-
+    <version>1.0.0</version>
+    <name>dubbo-provider</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-boot.version>2.1.9.RELEASE</spring-boot.version>
-        <dubbo.version>2.7.3</dubbo.version>
-        <curator.version>2.9.1</curator.version>
-        <lombok.version>1.18.8</lombok.version>
+
+        <logback-version>1.1.2</logback-version>
+        <twodfire-logback-version>1.0.8</twodfire-logback-version>
+        <logback-ext-spring>0.1.2</logback-ext-spring>
+        <logstash-logback-encoder>4.4</logstash-logback-encoder>
+
     </properties>
 
 
-
     <dependencies>
-
-        <dependency>
-            <groupId>com.pc</groupId>
-            <artifactId>dubbo-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-
         <!--springboot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot.version}</version>
+            <!--<version>${spring-boot.version}</version>-->
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -49,7 +43,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring-boot.version}</version>
+            <!--<version>${spring-boot.version}</version>-->
             <scope>test</scope>
         </dependency>
 
@@ -58,12 +52,10 @@
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>${dubbo.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
-            <version>${dubbo.version}</version>
         </dependency>
 
         <!--curator对应zk版本，由于zk版本太低因此降低版本-->
@@ -71,33 +63,59 @@
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-framework</artifactId>
             <!--<version>4.0.1</version>-->
-            <version>${curator.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
             <!--<version>4.0.1</version>-->
-            <version>${curator.version}</version>
         </dependency>
 
         <!--util-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
+            <!--父pom的dependencyManagement中维护，这里不需要版本号
+                如果直接是父pom的dependencies，那么这里就不需要写了，直接依赖
+            -->
         </dependency>
 
+        <!--project-->
+        <dependency>
+            <groupId>com.dfire.dubbo</groupId>
+            <artifactId>dubbo-api</artifactId>
+            <!--<version>${dubbo-api.version}</version>-->
+        </dependency>
+
+        <!--util-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>16.0.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.11</version>
+        <!--log-->
+        <!--<dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+            <version>${logback-ext-spring}</version>
         </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.twodfire</groupId>
+            <artifactId>twodfire-logback</artifactId>
+            <version>${twodfire-logback-version}</version>
+        </dependency>-->
+
 
     </dependencies>
 

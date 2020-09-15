@@ -3,30 +3,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>com.pc</groupId>
+        <groupId>com.dfire.dubbo</groupId>
         <artifactId>dubbo-boot-demo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>dubbo-consumer</artifactId>
+    <version>1.0.0</version>
+    <name>dubbo-consumer</name>
+
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.pc</groupId>
-            <artifactId>dubbo-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-
         <!--springboot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.1.9.RELEASE</version>
+            <!--<version>${spring-boot.version}</version>-->
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -38,23 +35,8 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.1.9.RELEASE</version>
+            <!--<version>${spring-boot.version}</version>-->
             <scope>test</scope>
-        </dependency>
-
-
-        <!--curator对应zk版本，由于zk版本太低因此降低版本-->
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-framework</artifactId>
-            <!--<version>4.0.1</version>-->
-            <version>2.9.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-recipes</artifactId>
-            <!--<version>4.0.1</version>-->
-            <version>2.9.1</version>
         </dependency>
 
 
@@ -62,34 +44,46 @@
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>2.7.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
-            <version>2.7.3</version>
+        </dependency>
+
+        <!--curator对应zk版本，由于zk版本太低因此降低版本-->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <!--<version>4.0.1</version>-->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <!--<version>4.0.1</version>-->
         </dependency>
 
         <!--util-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
+            <!--父pom的dependencyManagement中维护，这里不需要版本号
+                如果直接是父pom的dependencies，那么这里就不需要写了，直接依赖
+            -->
         </dependency>
 
+        <!--project-->
+        <dependency>
+            <groupId>com.dfire.dubbo</groupId>
+            <artifactId>dubbo-api</artifactId>
+            <!--<version>${dubbo-api.version}</version>-->
+        </dependency>
+
+        <!--util-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>16.0.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.11</version>
-        </dependency>
-
-
 
     </dependencies>
 

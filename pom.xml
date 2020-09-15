@@ -3,7 +3,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.pc</groupId>
+    <!--
+
+dependencyManagement 聚合关系，对jar版本进行管理，子pom需要声明依赖，版本由父pom决定
+dependencies  父子关系，子pom直接继承jar包 ，父pom
+如果由jar包冲突，那么聚合和继承可能会出错
+
+
+
+    -->
+    <parent>
+        <artifactId>parent-all</artifactId>
+        <groupId>com.dfire</groupId>
+        <version>1.0.4</version>
+    </parent>
+
+    <groupId>com.dfire.dubbo</groupId>
     <artifactId>dubbo-boot-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>dubbo-boot-demo</name>
@@ -15,6 +30,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-boot.version>2.1.9.RELEASE</spring-boot.version>
+        <lombok.version>1.18.8</lombok.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
+        <dubbo.version>2.7.3</dubbo.version>
+        <curator.version>2.9.1</curator.version>
+        <dubbo-api.version>1.0.0</dubbo-api.version>
     </properties>
 
 
@@ -24,9 +44,10 @@
         <module>dubbo-api</module>
     </modules>
 
-    <!--不继承-->
+    <!--对子类进行约束的包，子类需要声明依赖，但不需要version-->
     <dependencyManagement>
         <dependencies>
+            <!--springboot-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -34,8 +55,87 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <!--curator对应zk版本，由于zk版本太低因此降低版本-->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
+                </exclusions>
+                <!--<version>4.0.1</version>-->
+                <version>${curator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <!--<version>4.0.1</version>-->
+                <version>${curator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+
+            <!--project-->
+            <dependency>
+                <groupId>com.dfire.dubbo</groupId>
+                <artifactId>dubbo-api</artifactId>
+                <version>${dubbo-api.version}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
+
+    <!--子类直接继承的包，子类不需要声明继承-->
+    <dependencies>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+    </dependencies>
+
 
     <build>
         <plugins>
@@ -43,7 +143,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 

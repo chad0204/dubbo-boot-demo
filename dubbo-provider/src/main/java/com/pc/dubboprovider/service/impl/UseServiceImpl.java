@@ -15,7 +15,6 @@ import java.util.List;
 @Service//这个注解不是Spring的，是dubbo用于暴露服务的
 public class UseServiceImpl implements UserService,InnerUserService {
 
-
     public UserAddress getUserAddress(UserParam userParam) {
 
         List<UserAddress> list = new ArrayList<>();
