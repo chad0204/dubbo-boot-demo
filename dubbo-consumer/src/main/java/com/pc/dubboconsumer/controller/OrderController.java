@@ -2,21 +2,25 @@ package com.pc.dubboconsumer.controller;
 
 
 import com.pc.dubboapi.model.UserAddress;
+import com.pc.dubboapi.service.DemoService;
 import com.pc.dubboapi.service.OrderService;
 import com.pc.dubboapi.service.UserService;
-import jdk.nashorn.internal.ir.annotations.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 
 @RestController
 public class OrderController {
 
     @Autowired
     OrderService orderService;
+
+
+    @Reference(loadbalance="random")
+    DemoService demoService;
 
     @Autowired
     private ApplicationContext context;
@@ -30,5 +34,11 @@ public class OrderController {
         context.getBean("orderServiceImpl");
 
         return orderService.initOrder(id);
+    }
+
+    @RequestMapping("/call")
+    public String call(String name) {
+
+        return demoService.call(name);
     }
 }

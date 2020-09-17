@@ -35,6 +35,8 @@ dependencies  父子关系，子pom直接继承jar包 ，父pom
         <dubbo.version>2.7.3</dubbo.version>
         <curator.version>2.9.1</curator.version>
         <dubbo-api.version>1.0.0</dubbo-api.version>
+
+        <twodfire-logback-version>1.0.9</twodfire-logback-version>
     </properties>
 
 
@@ -121,6 +123,13 @@ dependencies  父子关系，子pom直接继承jar包 ，父pom
                 <version>${dubbo-api.version}</version>
             </dependency>
 
+
+            <!-- dfire log -->
+            <dependency>
+                <groupId>com.twodfire</groupId>
+                <artifactId>twodfire-logback</artifactId>
+                <version>${twodfire-logback-version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

@@ -94,28 +94,11 @@
         </dependency>
 
         <!--log-->
-        <!--<dependency>
-            <groupId>org.logback-extensions</groupId>
-            <artifactId>logback-ext-spring</artifactId>
-            <version>${logback-ext-spring}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>${logstash-logback-encoder}</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-            <scope>runtime</scope>
-        </dependency>
+        <!-- dfire log -->
         <dependency>
             <groupId>com.twodfire</groupId>
             <artifactId>twodfire-logback</artifactId>
-            <version>${twodfire-logback-version}</version>
-        </dependency>-->
-
+        </dependency>
 
     </dependencies>
 

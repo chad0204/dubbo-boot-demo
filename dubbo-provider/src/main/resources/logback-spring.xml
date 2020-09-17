@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{32}.%M:%L %msg%n%xException%n"/>
+    <!--日志文件路径-->
+    <property name="LOG_PATH" value="/Users/pengchao/work/logs/springboot/repay-platform"/>
+
+    <!--写日志到文件,需要绝对路径-->
+    <!--<property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/module-server.log}"/>-->
+
+    <!-- TODO 容器运行时不能写文件-->
+    <property name="LOG_FILE" value="/dev/null"/>
+
+    <!--包括CONSOLE等定义-->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <!-- 监控日志 ALERT_MONITOR -->
+    <appender name="ALERT_MONITOR" class="com.twodfire.log.appender.AsyncRollingFileAppender">
+        <file>${LOG_PATH}/alert_monitor.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/bak/alert_monitor.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <appender name="DEMO" class="com.twodfire.log.appender.AsyncRollingFileAppender">
+        <file>${LOG_PATH}/demo.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/bak/demo.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <maxHistory>2</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <!-- profile -->
+    <property name="LOG_LEVEL" value="INFO"/>
+
+    <logger name="ALERT_MONITOR" level="${LOG_LEVEL}">
+        <appender-ref ref="ALERT_MONITOR"/>
+    </logger>
+
+    <!--logger与appender绑定 作用是 name下的日志使用appender进行处理-->
+    <logger name="com.pc.dubboprovider.service.impl.DemoServiceImpl" level="${LOG_LEVEL}">
+        <appender-ref ref="DEMO"/>
+    </logger>
+
+    <!-- root logger -->
+    <root level="${LOG_LEVEL}">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ALERT_MONITOR"/>
+    </root>
+</configuration>
