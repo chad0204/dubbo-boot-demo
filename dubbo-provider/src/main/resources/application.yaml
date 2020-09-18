@@ -1,4 +1,4 @@
-# 优先级最高 ，应用基本配置
+# ----------应用基本配置---------------#
 server:
   port: 8081
 
@@ -7,8 +7,7 @@ spring:
     name: dubbo-boot-provider
 
 
-# ---------dubbo配置（优先级比properties低）-------------------#
-# 类比xml配置
+# ---------dubbo配置-------------------#
 dubbo:
   application:
     name: dubbo-boot-provider
