@@ -21,3 +21,4 @@ dubbo:
   provider:
     threads: 10
     threadpool: fixed
+    version: 1.0.0

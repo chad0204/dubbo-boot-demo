@@ -21,7 +21,7 @@
     <dubbo:protocol name="dubbo" port="20880" />
 
     暴露服务接口，ref指定实现的bean
-    <dubbo:service interface="com.pc.dubboapi.service.UserService" ref="userServiceImpl"/>
+    <dubbo:serviceapi interface="com.pc.dubboapi.serviceapi.UserService" ref="userServiceImpl"/>
     <bean id="userServiceImpl" class="com.pc.dubboprovider.service.impl.UseServiceImpl"/>
 
     连接控中心，配置协议，自动从注册中心发现

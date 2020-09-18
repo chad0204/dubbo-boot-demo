@@ -88,6 +88,23 @@
         </dependency>
 
 
+        <!--tpt-->
+        <dependency>
+            <groupId>com.pc.tpt.core</groupId>
+            <artifactId>tpt-pc-core</artifactId>
+            <version>1.0.0-RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pc.tpt.utils</groupId>
+            <artifactId>tpt-pc-utils</artifactId>
+            <version>1.0.0-RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pc.tpt.handler</groupId>
+            <artifactId>tpt-pc-handler</artifactId>
+            <version>1.0.0-RELEASE</version>
+        </dependency>
+
 
     </dependencies>
 

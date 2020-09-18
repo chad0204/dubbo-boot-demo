@@ -9,8 +9,6 @@ dependencyManagement 聚合关系，对jar版本进行管理，子pom需要声�
 dependencies  父子关系，子pom直接继承jar包 ，父pom
 如果由jar包冲突，那么聚合和继承可能会出错
 
-
-
     -->
     <parent>
         <artifactId>parent-all</artifactId>
@@ -35,6 +33,9 @@ dependencies  父子关系，子pom直接继承jar包 ，父pom
         <dubbo.version>2.7.3</dubbo.version>
         <curator.version>2.9.1</curator.version>
         <dubbo-api.version>1.0.0</dubbo-api.version>
+        <tpt-core-version>1.0.0-RELEASE</tpt-core-version>
+        <tpt-utils-version>1.0.0-RELEASE</tpt-utils-version>
+        <tpt-handler-version>1.0.0-RELEASE</tpt-handler-version>
     </properties>
 
 
@@ -121,6 +122,22 @@ dependencies  父子关系，子pom直接继承jar包 ，父pom
                 <version>${dubbo-api.version}</version>
             </dependency>
 
+            <!--tpt-->
+            <dependency>
+                <groupId>com.pc.tpt.core</groupId>
+                <artifactId>tpt-pc-core</artifactId>
+                <version>${tpt-core-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.pc.tpt.utils</groupId>
+                <artifactId>tpt-pc-utils</artifactId>
+                <version>${tpt-utils-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.pc.tpt.handler</groupId>
+                <artifactId>tpt-pc-handler</artifactId>
+                <version>${tpt-handler-version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

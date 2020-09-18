@@ -10,7 +10,7 @@
    http://dubbo.apache.org/schema/dubbo
    http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.pc.dubboapi.service"/>
+    <context:component-scan base-package="com.pc.dubboapi.serviceapi"/>
 
 
     <!--指定当前应用/服务名-->
@@ -22,8 +22,8 @@
 
 
     <!--引用服务接口，生成远程服务代理,采用注解引用，注释配置引用-->
-    <!--<dubbo:reference interface="com.pc.dubboapi.service.UserService" id="userService"/>-->
-    <!--<dubbo:reference interface="com.pc.dubboapi.command.service.IService" id="iService"/>-->
+    <!--<dubbo:reference interface="com.pc.dubboapi.serviceapi.UserService" id="userService"/>-->
+    <!--<dubbo:reference interface="com.pc.dubboapi.command.serviceapi.IService" id="iService"/>-->
 
 
     <!--连接监控中心，按协议连接和按照地址连接 -->
