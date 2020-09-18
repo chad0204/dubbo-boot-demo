@@ -1,0 +1,24 @@
+# 优先级最高 ，应用基本配置
+server:
+  port: 8081
+
+spring:
+  application:
+    name: dubbo-boot-provider
+
+
+# ---------dubbo配置（优先级比properties低）-------------------#
+# 类比xml配置
+dubbo:
+  application:
+    name: dubbo-boot-provider
+  registry:
+    address: zookeeper://47.98.213.18:2181
+  protocol:
+    name: dubbo
+    port: 20881
+  monitor:
+    protocol: register
+  provider:
+    threads: 10
+    threadpool: fixed

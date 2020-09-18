@@ -7,13 +7,18 @@ public class UserAddress implements Serializable {
     private static final long serialVersionUID = 5098049650305960117L;
     private Long id;
     private String username;
-    private String address;
+    private String number;
 
 
-    public UserAddress(Long id, String username, String address) {
+    public UserAddress(Long id, String username) {
         this.id = id;
         this.username = username;
-        this.address = address;
+    }
+
+    public UserAddress(Long id, String username, String number) {
+        this.id = id;
+        this.username = username;
+        this.number = number;
     }
 
     public Long getId() {
@@ -32,12 +37,12 @@ public class UserAddress implements Serializable {
         this.username = username;
     }
 
-    public String getAddress() {
-        return address;
+    public String getNumber() {
+        return number;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setNumber(String number) {
+        this.number = number;
     }
 }
 

@@ -18,14 +18,12 @@ public class UseServiceImpl implements UserService,InnerUserService {
     public UserAddress getUserAddress(UserParam userParam) {
 
         List<UserAddress> list = new ArrayList<>();
-        list.add(new UserAddress(1L,"鸣人","木叶村"));
-        list.add(new UserAddress(2L,"路飞","东海"));
+        list.add(new UserAddress(1L,"鸣人","110"));
+        list.add(new UserAddress(2L,"路飞","119"));
 
         for (UserAddress userAddr:list) {
             if(userParam.getId().equals(userAddr.getId())) {
                 return userAddr;
-            } else {
-                System.err.println("id 错误");
             }
         }
 

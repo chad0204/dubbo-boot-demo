@@ -8,23 +8,25 @@
    http://dubbo.apache.org/schema/dubbo
    http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
-    <!--指定当前应用/服务名-->
+    <!--过气配置-->
+    <!--<dubbo:application name="dubbo-provider"/>-->
+    <!--指定当前应用/服务名
     <dubbo:application name="dubbo-provider"/>
 
-    <!--指定注册中心-->
-    <!--<dubbo:registry address="zookeeper://127.0.0.1:2181" />-->
+    指定注册中心
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
     <dubbo:registry protocol="zookeeper" address="47.98.213.18:2181"/>
 
-    <!-- 用dubbo协议在20880端口暴露服务 -->
+     用dubbo协议在20880端口暴露服务
     <dubbo:protocol name="dubbo" port="20880" />
 
-    <!--暴露服务接口，ref指定实现的bean-->
+    暴露服务接口，ref指定实现的bean
     <dubbo:service interface="com.pc.dubboapi.service.UserService" ref="userServiceImpl"/>
     <bean id="userServiceImpl" class="com.pc.dubboprovider.service.impl.UseServiceImpl"/>
 
-    <!--连接控中心，配置协议，自动从注册中心发现-->
+    连接控中心，配置协议，自动从注册中心发现
     <dubbo:monitor protocol="register"/>
-    <!--<dubbo:monitor address="127.0.0.1:8282"/>-->
+    <dubbo:monitor address="127.0.0.1:8282"/>-->
 
 
 

@@ -12,6 +12,7 @@ public class UserParam implements Serializable {
 
     private Long id;
     private String username;
+    private String number;
 
     public Long getId() {
         return id;
@@ -27,5 +28,13 @@ public class UserParam implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }
