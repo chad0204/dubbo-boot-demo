@@ -1,13 +1,11 @@
-package com.pc.dubboapi.response;
-
+package com.pc.dubboprovider.action;
 
 /**
  *
  * @author pengchao
- * @date 17:27 2020-09-18
+ * @date 15:21 2020-09-21
  */
-public class TradeResponse implements Response {
-
+public abstract class PayResult {
     private Double fee;
 
     private String type;
@@ -26,13 +24,5 @@ public class TradeResponse implements Response {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "TradeResponse{" +
-                "fee=" + fee +
-                ", type='" + type + '\'' +
-                '}';
     }
 }

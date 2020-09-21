@@ -9,8 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @DubboComponentScan(basePackages = "com.pc.dubboprovider.service.impl")
-@SpringBootApplication
-//@EnableDubboConfig
+@SpringBootApplication(scanBasePackages = {"com.pc.tpt","com.pc.dubboprovider"})
 public class DubboProviderApplication {
 
     public static void main(String[] args) {

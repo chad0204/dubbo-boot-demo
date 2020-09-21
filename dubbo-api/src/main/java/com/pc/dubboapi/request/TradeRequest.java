@@ -1,16 +1,12 @@
 package com.pc.dubboapi.request;
 
-
+import java.io.Serializable;
 
 /**
+ * 请求接口
  *
  * @author pengchao
- * @date 17:24 2020-09-18
+ * @date 14:43 2020-09-18
  */
-public class TradeRequest implements Request {
-
-    private Long id;
-
-    private String type;
-
+public interface TradeRequest<RSP> extends Serializable {
 }
