@@ -59,6 +59,10 @@
         </dependency>
 
         <!--curator对应zk版本，由于自己搭的zk版本太低因此降低版本-->
+        <!--
+        zookeeper 需要使用3.5+版本 -> curator 4.0+
+        zookeeper 需要使用3.4.*版本 -> curator 2.0+
+        采坑了-->
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
@@ -74,17 +78,26 @@
             -->
         </dependency>
 
-        <!--project-->
-        <dependency>
-            <groupId>com.dfire.dubbo</groupId>
-            <artifactId>dubbo-api</artifactId>
-        </dependency>
-
-        <!--util-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>16.0.1</version>
+        </dependency>
+
+        <!--sentinel-apache-dubbo-adapter在tpt-core中引入-->
+        <!--java -Dserver.port=8080 -Dcsp.sentinel.dashboard.server=localhost:8080 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard.jar-->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-transport-simple-http</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+
+
+
+        <!--project-->
+        <dependency>
+            <groupId>com.dfire.dubbo</groupId>
+            <artifactId>dubbo-api</artifactId>
         </dependency>
 
 
@@ -104,6 +117,8 @@
             <artifactId>tpt-pc-handler</artifactId>
             <version>1.0.0-RELEASE</version>
         </dependency>
+
+
 
 
     </dependencies>
