@@ -13,7 +13,7 @@ public class CallServiceImpl implements CallService{
     @Override
     public String call() {
 
-        //测试DEGRADE_GRADE_EXCEPTION_COUNT，可以看到只抛出5个异常，其余的请求没有进来
+        //测试DEGRADE_GRADE_EXCEPTION_COUNT，可以看到这里只抛出5个异常，其余的请求没有进来
 //        throw new RuntimeException("bizException");
 
         try {
@@ -26,6 +26,7 @@ public class CallServiceImpl implements CallService{
     }
 
     @Override
+    @Deprecated
     public String fallback() {
         return "fallback";
     }

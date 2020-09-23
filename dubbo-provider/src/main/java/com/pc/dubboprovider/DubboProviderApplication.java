@@ -4,8 +4,6 @@ import com.alibaba.csp.sentinel.adapter.dubbo.fallback.DubboFallback;
 import com.alibaba.csp.sentinel.adapter.dubbo.fallback.DubboFallbackRegistry;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
-import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
-import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import com.pc.dubboapi.serviceapi.CallService;
@@ -17,7 +15,6 @@ import org.apache.dubbo.rpc.Result;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -34,28 +31,29 @@ public class DubboProviderApplication {
 
     public static void main(String[] args) {
 //        initFlowRule(10,false);//初始化限流规则,接口限流
-//        initFlowRule(20,true);//初始化限流规则,方法限流
+        initFlowRule(5,true);//初始化限流规则,方法限流
 
-        //注册降级 返回默认结果
+        initFallBack();
+
+        SpringApplication.run(DubboProviderApplication.class, args);
+    }
+
+    private static void initFallBack() {
+        //注册限流后的降级方法 返回默认结果
 //        DubboFallbackRegistry.setProviderFallback(new DubboFallback() {
 //            @Override
 //            public Result handle(Invoker<?> invoker, Invocation invocation, BlockException e) {
-//                return AsyncRpcResult.newDefaultAsyncResult("fallback",invocation);
+//                return AsyncRpcResult.newDefaultAsyncResult("flow fallback",invocation);
 //            }
 //        });
 
-        //注册降级 返回自定义异常
+        //注册降级 返回自定义异常,返回异常使consumer端发生熔断
         DubboFallbackRegistry.setProviderFallback(new DubboFallback() {
             @Override
             public Result handle(Invoker<?> invoker, Invocation invocation, BlockException ex) {
-                return  AsyncRpcResult.newDefaultAsyncResult(new RuntimeException("fallback"), invocation);
+                return  AsyncRpcResult.newDefaultAsyncResult(new RuntimeException("flow fallback"), invocation);
             }
         });
-
-
-
-
-        SpringApplication.run(DubboProviderApplication.class, args);
     }
 
     //限流配置

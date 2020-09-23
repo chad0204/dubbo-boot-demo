@@ -1,10 +1,17 @@
 package com.pc.dubboconsumer;
 
+import com.alibaba.csp.sentinel.adapter.dubbo.fallback.DubboFallback;
+import com.alibaba.csp.sentinel.adapter.dubbo.fallback.DubboFallbackRegistry;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
 import com.pc.dubboapi.serviceapi.CallService;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
+import org.apache.dubbo.rpc.AsyncRpcResult;
+import org.apache.dubbo.rpc.Invocation;
+import org.apache.dubbo.rpc.Invoker;
+import org.apache.dubbo.rpc.Result;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.ArrayList;
@@ -21,7 +28,27 @@ public class DubboConsumerApplication {
 
     public static void main(String[] args) {
         initdegradeRule(10);//初始化降级规则
+        initFallBack();
         SpringApplication.run(DubboConsumerApplication.class, args);
+    }
+
+
+    private static void initFallBack() {
+        //注册熔断后的降级方法 返回默认结果
+        DubboFallbackRegistry.setConsumerFallback(new DubboFallback() {
+            @Override
+            public Result handle(Invoker<?> invoker, Invocation invocation, BlockException e) {
+                return AsyncRpcResult.newDefaultAsyncResult("degrade fallback",invocation);
+            }
+        });
+
+        //注册降级 返回自定义异常
+//        DubboFallbackRegistry.setConsumerFallback(new DubboFallback() {
+//            @Override
+//            public Result handle(Invoker<?> invoker, Invocation invocation, BlockException ex) {
+//                return  AsyncRpcResult.newDefaultAsyncResult(new RuntimeException("degrade fallback"), invocation);
+//            }
+//        });
     }
 
 
@@ -42,6 +69,8 @@ public class DubboConsumerApplication {
         List<DegradeRule> rules = new ArrayList<>();
         rules.add(degradeRule);
         DegradeRuleManager.loadRules(rules);
+
+
 
     }
 

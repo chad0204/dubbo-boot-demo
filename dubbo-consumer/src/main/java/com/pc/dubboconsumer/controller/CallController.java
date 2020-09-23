@@ -9,6 +9,8 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.rpc.RpcException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 @RestController
@@ -22,22 +24,42 @@ public class CallController {
     private TradeService tradeService;
 
 
+    /**
+     *
+     * provider进行限流
+     * consumer进行熔断
+     *
+     * 当请求超过限流qps，provider返回fallback异常，如果异常超过consumer熔断阈值count，consumer将开启熔断，不发起远程调用直接返回fallback
+     *
+     * @param num 请求次数
+     * @return
+     * @throws InterruptedException
+     */
     //http://localhost:8082/call
     @RequestMapping("/call")
-    public String call(int num) {
+    public String call(int num) throws InterruptedException {
 
-        int count = 0;
+        AtomicInteger count = new AtomicInteger(0);
+        CountDownLatch countDownLatch = new CountDownLatch(num);
+
         for(int i=0;i<num;i++) {
-            try {
-                System.out.println(callService.call());
-            } catch (Exception e) {
-//                System.out.println(callService.fallback());
-                count++;
-                System.err.println("Flow Blocked");
-            }
 
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        System.out.println(callService.call());
+                    } catch (Exception e) {
+                        count.incrementAndGet();
+                        System.err.println(e.getMessage());
+                    }
+                    countDownLatch.countDown();
+                }
+            }).start();
         }
-        return "blocked"+count;
+
+        countDownLatch.await();
+        return "blocked"+count.get();
     }
 
 
