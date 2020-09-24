@@ -1,6 +1,5 @@
 package com.pc.dubboprovider.service.impl;
 
-import com.pc.dubboapi.request.AbstractTradeRequest;
 import com.pc.dubboapi.request.TradeRequest;
 import com.pc.dubboapi.response.TradeResponse;
 import com.pc.dubboapi.serviceapi.TradeService;

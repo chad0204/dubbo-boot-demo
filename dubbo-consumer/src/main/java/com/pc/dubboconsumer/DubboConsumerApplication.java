@@ -7,6 +7,7 @@ import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
 import com.pc.dubboapi.serviceapi.CallService;
+import com.pc.dubboconsumer.controller.CallController;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubboConfig;
 import org.apache.dubbo.rpc.AsyncRpcResult;
 import org.apache.dubbo.rpc.Invocation;
@@ -22,18 +23,21 @@ import java.util.List;
 @SpringBootApplication
 public class DubboConsumerApplication {
 
-
+    //对dubbo接口进行限流熔断,SentinelDubboConsumerFilter
     private static final String RESOURCE_INTERFACE_KEY = CallService.class.getName();
     private static final String RESOURCE_METHOD_KEY = RESOURCE_INTERFACE_KEY+":call()";
 
+
+
+
     public static void main(String[] args) {
-        initdegradeRule(10);//初始化降级规则
-        initFallBack();
+        initDegradeRule(10);//初始化降级规则
+        registryFallBack();
         SpringApplication.run(DubboConsumerApplication.class, args);
     }
 
 
-    private static void initFallBack() {
+    private static void registryFallBack() {
         //注册熔断后的降级方法 返回默认结果
         DubboFallbackRegistry.setConsumerFallback(new DubboFallback() {
             @Override
@@ -52,7 +56,7 @@ public class DubboConsumerApplication {
     }
 
 
-    private static void initdegradeRule(int timewindow) {
+    private static void initDegradeRule(int timewindow) {
         //同一个资源可以同时有多个降级规则
         DegradeRule degradeRule = new DegradeRule(RESOURCE_INTERFACE_KEY)
                 //DEGRADE_GRADE_RT 平均响应时间，count以ms为单位，当出现响应时间超过count，那么进入准降级状态，如果接下来的5个请求都超过count，那么在timeWindow内，抛出DegradeException

@@ -25,7 +25,7 @@ import java.util.List;
 @SpringBootApplication(scanBasePackages = {"com.pc.tpt","com.pc.dubboprovider"})
 public class DubboProviderApplication {
 
-
+    //对dubbo接口进行限流熔断（如果要对其他方式进行熔断，需要自定义）,SentinelDubboProviderFilter
     private static final String RESOURCE_INTERFACE_KEY = CallService.class.getName();
     private static final String RESOURCE_METHOD_KEY = RESOURCE_INTERFACE_KEY+":call()";
 
@@ -33,12 +33,12 @@ public class DubboProviderApplication {
 //        initFlowRule(10,false);//初始化限流规则,接口限流
         initFlowRule(5,true);//初始化限流规则,方法限流
 
-        initFallBack();
+        registryFallBack();
 
         SpringApplication.run(DubboProviderApplication.class, args);
     }
 
-    private static void initFallBack() {
+    private static void registryFallBack() {
         //注册限流后的降级方法 返回默认结果
 //        DubboFallbackRegistry.setProviderFallback(new DubboFallback() {
 //            @Override
