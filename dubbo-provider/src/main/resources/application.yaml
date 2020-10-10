@@ -22,3 +22,10 @@ dubbo:
     threads: 10
     threadpool: fixed
     version: 1.0.0
+
+
+# es 配置
+elasticsearch:
+  hosts: localhost:9200
+  username:
+  password:
